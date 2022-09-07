@@ -1,0 +1,60 @@
+version: '3.5'
+
+volumes:
+    db: ~
+
+networks:
+    default:
+        name: jobtest
+
+services:
+    app:
+        build:
+            context: docker/app
+        container_name: jobtest_app
+        volumes:
+            - .:/var/www/html
+            - ./docker/app/config/app.ini:/usr/local/etc/php/conf.d/app.ini:ro
+
+    front:
+        image: nginx:1.14-alpine
+        container_name: jobtest_front
+        depends_on:
+            - app
+        volumes:
+            - ./docker/front/config/app.conf:/etc/nginx/conf.d/app.conf
+            - ./web:/var/www/html/public
+        labels:
+            - "traefik.frontend.rule=Host:local.jobtest.fr"
+        networks:
+            default:
+                aliases:
+                    - local.jobtest.fr
+
+    cli:
+        build:
+            context: docker/cli
+        container_name: jobtest_cli
+        volumes:
+            - .:/var/www/html
+            - ./docker/cli/config/cli.ini:/usr/local/etc/php/conf.d/cli.ini:ro
+
+    redis:
+        image: redis:alpine
+        container_name: jobtest_redis
+
+    mysql:
+        image: registry.oxygem.tv/m6/docker-images/mariadb:10.3
+        container_name: jobtest_mysql
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=drupal
+        volumes:
+            - db:/var/lib/mysql
+
+    node:
+        image: node:10.11-alpine
+        container_name: jobtest_node
+        working_dir: /var/www/html
+        volumes:
+            - .:/var/www/html

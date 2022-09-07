@@ -1,0 +1,1 @@
+FROM registry.oxygem.tv/m6/docker-images/php:8.1-cli
