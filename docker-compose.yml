@@ -35,6 +35,7 @@ services:
         build:
             context: docker/cli
         container_name: jobtest_cli
+        working_dir: /var/www/html
         volumes:
             - .:/var/www/html
             - ./docker/cli/config/cli.ini:/usr/local/etc/php/conf.d/cli.ini:ro
