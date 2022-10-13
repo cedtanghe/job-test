@@ -23,7 +23,7 @@ services:
             - app
         volumes:
             - ./docker/front/config/app.conf:/etc/nginx/conf.d/app.conf
-            - ./web:/var/www/html/public
+            - ./public:/var/www/html/public
         labels:
             - "traefik.frontend.rule=Host:local.jobtest.fr"
         networks:
@@ -49,7 +49,7 @@ services:
         container_name: jobtest_mysql
         environment:
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-            - MYSQL_DATABASE=drupal
+            - MYSQL_DATABASE=jobtest
         volumes:
             - db:/var/lib/mysql
 

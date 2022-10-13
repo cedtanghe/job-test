@@ -1,0 +1,8 @@
+App\Entity\Food:
+    food_steak:
+        name: 'Steak'
+        type: '@type_meat'
+
+    type_carrot:
+        name: 'Carrot'
+        type: '@type_vegetable'

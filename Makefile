@@ -22,3 +22,14 @@ composer:
 ## Install node dependencies
 node:
 	$(COMPOSE) run --rm node npm install
+
+.PHONY: fixtures
+## Load fixtures
+fixtures:
+	$(COMPOSE) run --rm cli bash -c 'APP_ENV=$(APP_ENV) bin/console hautelook:fixtures:load'; \
+
+.PHONY: rights
+## Rights
+rights:
+	$(COMPOSE) run --rm cli chmod 777 -R var/cache
+	$(COMPOSE) exec phpmyadmin bash -c 'chmod -v 0555 /etc/phpmyadmin/config.inc.php'
