@@ -11,17 +11,12 @@ install: configure containers dependencies
 
 .PHONY: dependencies
 ## Install the project's dependencies
-dependencies: node composer
+dependencies: composer
 
 .PHONY: composer
 ## Install composer dependencies
 composer:
 	$(COMPOSE) run --rm cli bash -c 'export APP_ENV=$(APP_ENV); composer install $(COMPOSER_ARGS)'
-
-.PHONY: node
-## Install node dependencies
-node:
-	$(COMPOSE) run --rm node npm install
 
 .PHONY: fixtures
 ## Load fixtures
@@ -32,4 +27,4 @@ fixtures:
 ## Rights
 rights:
 	$(COMPOSE) run --rm cli chmod 777 -R var/cache
-	$(COMPOSE) exec phpmyadmin bash -c 'chmod -v 0555 /etc/phpmyadmin/config.inc.php'
+#	$(COMPOSE) exec phpmyadmin bash -c 'chmod -v 0555 /etc/phpmyadmin/config.inc.php'

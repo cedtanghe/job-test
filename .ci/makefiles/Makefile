@@ -1,9 +1,4 @@
 COMPOSE ?= docker-compose
-REGISTRY_HOSTNAME = registry.oxygem.tv
-CI_CONF_FILES_PATH = .ci
-NPM_CONFIGURATION_FILE = .npmrc
-GIT_CONF_FILES_PATH = ~/git-config
-GIT_HOOK_PATH = .git/hooks
 SHELL = /bin/bash
 # Defined the default target if none is used when we call make
 .DEFAULT_GOAL := install
