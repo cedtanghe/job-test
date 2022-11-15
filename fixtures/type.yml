@@ -1,0 +1,6 @@
+App\Entity\Type:
+    type_meat:
+        name: 'Meat'
+
+    type_vegetable:
+        name: 'Vegetable'
