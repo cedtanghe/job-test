@@ -13,14 +13,6 @@ install: configure containers dependencies
 ## Install the project's dependencies
 dependencies: node composer
 
-## Download CI configuration files
-.ci/makefiles/Makefile:
-	@curl \
-		--silent \
-		-H 'PRIVATE-TOKEN: MbmkKbvyrmDYu_jLNotx' \
-		https://gitlab.oxygem.tv/api/v4/projects/579/repository/files/install-config-files.sh?ref=master \
-		| sed -En 's/.*"content":"(.*)".*/\1/p' | base64 --decode | bash -s - $@
-
 .PHONY: composer
 ## Install composer dependencies
 composer:
