@@ -2,27 +2,10 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
-use App\State\ShopProvider;
-
-#[ApiResource(
-    operations: [
-        new Get(
-            uriTemplate: '/magasin/{id}',
-            provider: ShopProvider::class
-        ),
-        new GetCollection(
-            uriTemplate: '/magasins',
-            provider: ShopProvider::class
-        ),
-    ]
-)]
 class Shop
 {
-    public ?int $id = null;
-    public ?string $name = null;
+    private ?int $id;
+    private ?string $name;
 
     public function __construct(array $values)
     {
@@ -30,5 +13,15 @@ class Shop
             'id' => $this->id,
             'name' => $this->name,
         ] = $values;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
     }
 }

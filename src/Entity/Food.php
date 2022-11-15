@@ -2,24 +2,10 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 use App\Repository\FoodRepository;
-use App\Shop\ShopLocator;
+use App\State\FoodProcessor;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ApiResource(
-    operations: [
-        new Get(
-            uriTemplate: '/aliments/{id}',
-        ),
-        new GetCollection(
-            uriTemplate: '/aliments',
-        ),
-        new Get(name: 'shop', uriTemplate: '/aliments/{id}/magasin', controller: ShopLocator::class),
-    ]
-)]
 #[ORM\Entity()]
 class Food
 {
