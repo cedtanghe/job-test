@@ -18,10 +18,16 @@ dependencies: composer
 composer:
 	$(COMPOSE) run --rm cli bash -c 'export APP_ENV=$(APP_ENV); composer install $(COMPOSER_ARGS)'
 
+.PHONY: database
+## Create database
+database:
+	$(COMPOSE) run --rm cli bash -c 'APP_ENV=$(APP_ENV) php bin/console doctrine:database:create'
+	$(COMPOSE) run --rm cli bash -c 'APP_ENV=$(APP_ENV) php bin/console doctrine:migrations:migrate'
+
 .PHONY: fixtures
 ## Load fixtures
 fixtures:
-	$(COMPOSE) run --rm cli bash -c 'APP_ENV=$(APP_ENV) bin/console hautelook:fixtures:load'; \
+	$(COMPOSE) run --rm cli bash -c 'APP_ENV=$(APP_ENV) bin/console hautelook:fixtures:load'
 
 .PHONY: rights
 ## Rights
